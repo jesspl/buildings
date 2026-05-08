@@ -14,9 +14,9 @@ def select(asDict=False):
 
     cons="""
         SELECT 
-            id, description, area, st_astext(geom)
+            id, nombre, longitud, estado, st_astext(geom)
         FROM 
-            d.buildings 
+            p1.calles
         WHERE
             id>%s
         """

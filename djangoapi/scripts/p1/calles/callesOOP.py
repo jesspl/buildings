@@ -4,7 +4,7 @@ from myLib.connect import connect
 from myLib.p1Settings import EPSG_CODE
 
 
-class BuildingsOOP():
+class callesOOP():
     def __init__(self):
         self.conn=connect()
         self.cur=self.conn.cursor()
@@ -13,17 +13,17 @@ class BuildingsOOP():
         self.conn.close()
     def insert(self):
         cons="""
-        INSERT INTO d.buildings 
-            (description, area,geom)
+        INSERT INTO p1.calles 
+            (nombre, longitud, estado, geom)
         VALUES
             (%s,%s,
             st_geometryFromText(%s,%s))
         RETURNING id
         """
         self.cur.execute(cons,
-                    ['My first building',
+                    ['My first street',
                     100,
-                    'POLYGON((0 0, 100 0, 100 100, 0 100, 0 0))',
+                    'POLYLINE((0 0, 100 100))', #'POLYGON((0 0, 100 0, 100 100, 0 100, 0 0))',
                     EPSG_CODE
                     ])
         self.conn.commit()
@@ -40,9 +40,9 @@ class BuildingsOOP():
         
         cons="""
         SELECT 
-            id, description, area, st_astext(geom)
+            id, nombre, longitud, estado, geom  
         FROM 
-            d.buildings 
+            p1.calles
         WHERE
             id>%s
         """

@@ -1,5 +1,5 @@
 import sys
-from buildings.buildingsOOP import BuildingsOOP
+from djangoapi.scripts.p1.calles.callesOOP import BuildingsOOP
 
 
 def main():
