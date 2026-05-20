@@ -1,28 +1,25 @@
 from myLib.connect import connect
 from myLib.p1Settings import EPSG_CODE
 
-def update():
+def update(id=1, nombre='Semaforo actualizado', estado='activo', tipo='vehicular'):
     conn = connect()
     cur = conn.cursor()
     cons = """
-        UPDATE
-            p1.semaforos 
-        SET 
-            (nombre, estado, tipo, geom) = ROW(%s, %s, %s, st_geometryFromText(%s, %s))    
-        WHERE
-            id = %s
+        UPDATE p1.semaforos 
+        SET (nombre, estado, tipo, geom) = ROW(%s, %s, %s, st_geometryFromText(%s, %s))    
+        WHERE id = %s
         """
     valuesList = [
-        'Semaforo actualizado',
-        'inactivo',
-        'peatonal',
+        nombre,
+        estado,
+        tipo,
         'POINT(725000 4370000)',
         EPSG_CODE,
-        1
+        int(id)
     ]
     cur.execute(cons, valuesList)
     print(cur.rowcount)
     conn.commit()
     cur.close()
     conn.close()
-    print("Updated")
+    print(f"Updated id:{id} nombre:{nombre}")

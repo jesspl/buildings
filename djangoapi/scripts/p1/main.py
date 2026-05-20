@@ -16,11 +16,9 @@ from manzanas.update import update as update_manzanas
 from manzanas.delete import delete as delete_manzanas
 
 def main():
-    # sys.argv[0] es siempre el nombre del archivo (main.py)
-    # Por eso verificamos que haya al menos 3 elementos (nombre + p1 + p2)
-    if len(sys.argv) == 3:
+    if len(sys.argv) >= 3:
         tableName = sys.argv[1]
-        functionName = sys.argv[2]     
+        functionName = sys.argv[2]
     else:
         print("Error: You must give two parameters tableName and functionName.")
         sys.exit(0)
@@ -28,7 +26,7 @@ def main():
     if tableName not in ["calles", "semaforos", "manzanas"]:
         print("Error: The available table names are calles, semaforos, manzanas")
         sys.exit(0)
-    
+
     if functionName not in ["insert", "select", "selectAsDict", "update", "delete"]:
         print("Error: The available function names are insert, select, selectAsDict, update, delete")
         sys.exit(0)
@@ -41,7 +39,9 @@ def main():
         elif functionName == "selectAsDict":
             select_calles(asDict=True)
         elif functionName == "update":
-            update_calles()
+            id     = sys.argv[3] if len(sys.argv) > 3 else 1
+            nombre = sys.argv[4] if len(sys.argv) > 4 else 'Calle actualizada'
+            update_calles(id, nombre)
         elif functionName == "delete":
             delete_calles()
 
@@ -53,7 +53,9 @@ def main():
         elif functionName == "selectAsDict":
             select_semaforos(asDict=True)
         elif functionName == "update":
-            update_semaforos()
+            id     = sys.argv[3] if len(sys.argv) > 3 else 1
+            nombre = sys.argv[4] if len(sys.argv) > 4 else 'Semaforo actualizado'
+            update_semaforos(id, nombre)
         elif functionName == "delete":
             delete_semaforos()
 
@@ -71,4 +73,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

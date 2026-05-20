@@ -1,48 +1,34 @@
 import sys
-from djangoapi.scripts.p1.calles.callesOOP import BuildingsOOP
-
+from calles.callesOOP import callesOOP
 
 def main():
-    # sys.argv[0] es siempre el nombre del archivo (main.py)
-    # Por eso verificamos que haya al menos 3 elementos (nombre + p1 + p2)
     if len(sys.argv) == 3:
         tableName = sys.argv[1]
         functionName = sys.argv[2]     
     else:
-        print("Error: You mus give two parameters tableName and functionName to execute the addecuate function.")
+        print("Error: You must give two parameters tableName and functionName.")
         sys.exit(0)
 
-
-    if tableName not in ["buildings", "trees", "water"]:
-        print("Error: The available table names are buildings, trees, water")
+    if tableName not in ["calles", "semaforos", "manzanas"]:
+        print("Error: The available table names are calles, semaforos, manzanas")
         sys.exit(0)
     
     if functionName not in ["insert", "select", "selectAsDict", "update", "delete"]:
-        print("Error the available function names are insert, select, delete or update")
+        print("Error: The available function names are insert, select, selectAsDict, update, delete")
         sys.exit(0)
 
-    if tableName == "buildings":
-        b=BuildingsOOP()
-        if functionName=="insert":
+    if tableName == "calles":
+        b = callesOOP()
+        if functionName == "insert":
             b.insert()
-        elif functionName=="select":
+        elif functionName == "select":
             b.select()
-        elif functionName=="selectAsDict":
+        elif functionName == "selectAsDict":
             b.select(asDict=True)
-        elif functionName=="update":
-            pass
-        elif functionName=="delete":
-            pass
-    elif tableName=="trees":
-        if functionName=="insert":
-            pass
-        elif functionName=="select":
-            pass
-        elif functionName=="update":
-            pass
-        elif functionName=="delete":
-            pass
+        elif functionName == "update":
+            b.update()
+        elif functionName == "delete":
+            b.delete()
 
 if __name__ == "__main__":
     main()
-

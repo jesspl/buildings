@@ -1,6 +1,3 @@
-from core.myLib.geoModelSerializer import GeoModelSerializer, GeomodelLinestringSerializer, GeomodelPolygonSerializer
-from .models import Calles, Semaforos, Manzanas
-
 from core.myLib.geoModelSerializer import GeoModelSerializer, GeomodelPolygonSerializer
 from .models import Calles, Semaforos, Manzanas
 
